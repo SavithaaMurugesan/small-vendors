@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Accounts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Bank Accounts Maintenance</h2>
+        <div class="row mt-4">
+            <div class="col">AccNo</div>
+            <div class="col">AccName</div>
+            <div class="col">Branch</div>
+            <div class="col">IFSC</div>
+            <div class="col">Balance</div>
+            <div class="col">Action</div>
+        </div>
+        <div class="row mt-4">
+            <div class="col"><input type="text" id="accNo" name="accNo" class="form-control"></div>
+            <div class="col"><input type="text" id="accName" name="accName" class="form-control"></div>            
+            <div class="col"><input type="text" id="branch" name="branch" class="form-control"></div>            
+            <div class="col"><input type="text" id="ifsc" name="ifsc" class="form-control"></div>            
+            <div class="col"><input type="text" id="balance" name="balance" class="form-control"></div>
+            <div class="col"><button type="button" class="btn btn-success" onclick="addAccount()">Add Account</button></div>
+        </div>
+        <div id="accounts"></div>
+        <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">Net Worth</div>
+            <div class="col" id="accNetWorth"></div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <script>
+
+        var tempAccDB = [];
+        var accNo="";
+        var accName = "";
+        var branch = "";
+        var ifsc = "";
+        var balance = "";
+
+        function getInputs(){
+            accNo = document.getElementById('accNo');
+            accName = document.getElementById('accName');
+            branch = document.getElementById('branch');
+            ifsc = document.getElementById('ifsc');
+            balance = document.getElementById('balance');
+        }
+
+        function resetData(){
+            accNo.value = "";
+            accName.value = "";
+            branch.value = "";
+            ifsc.value = "";
+            balance.value = "";
+        }
+
+        function addAccount(){
+            getInputs();       
+
+            let account = {
+                                "ifsc": ifsc.value,
+                                "accNo": accNo.value,
+                                "branch": branch.value,
+                                "accName": accName.value,
+                                "balance": balance.value
+                            }
+
+            fetch("https://retoolapi.dev/w9vJWe/account",
+                    { "method": "POST",
+                      "body": JSON.stringify(account),
+                      "headers": { "Content-Type":"application/json; charset=UTF-8"}
+                    })
+            .then((response)=> {
+                if(response && response.ok){
+                    console.log(response.json);
+                    return response.json();
+                }
+            })
+            .then((data)=>{
+                console.log(data);
+                
+                alert("Account Added.. : " + data.id );
+                getAccounts();
+            })
+            console.log(tempAccDB);
+            resetData();
+        }
+        function getAccounts(){
+            fetch("https://retoolapi.dev/w9vJWe/account",{
+                "method":"GET",
+                "headers":{ "content-type":"application/json;charset=utf-8"}
+            })
+            .then((response)=>{return response.json();})
+            .then((data)=> {
+                console.log(data);
+                displayAccounts(data)})
+        }
+        function displayAccounts(accounts){
+            
+            let result = "";
+            for(let account of accounts){
+                result += '<div class="row mt-4">' ;
+                result += '<div class="col">' + account.accNo + '</div>';
+                result += '<div class="col">' + account.accName + '</div>';
+                result += '<div class="col">' + account.branch + '</div>';
+                result += '<div class="col">' + account.ifsc + '</div>';
+                result += '<div class="col">' + account.balance + '</div>';
+                result +=   '<div class="col">' +
+                                '<button type="button" class="btn btn-warning" onclick="updateAccount('+ account.id +')">Update</button>' + '&nbsp;&nbsp;' +
+                                '<button type="button" class="btn btn-danger" onclick="deleteAccount('+ account.id +')">Delete</button>' +
+                            '</div>' +
+                         '</div>';                                
+            }
+            document.getElementById('accounts').innerHTML = result;
+            calcNetWorth();
+        }
+
+        function calcNetWorth(){
+            let result =0;
+            for(let account of tempAccDB){
+                result += Number(account[4]);
+            }
+            document.getElementById('accNetWorth').innerHTML = result;
+        }
+
+        function deleteAccount(idx){
+            console.log(tempAccDB[idx]);
+            tempAccDB.splice(idx,1);
+            displayAccounts();
+        }
+
+        function updateAccount(idx){
+            let account = tempAccDB[idx];
+            accNo.value = account[0];
+            accName.value = account[1];
+            branch.value = account[2];
+            ifsc.value = account[3];
+            balance.value = account[4];
+            deleteAccount(idx);
+        }
+    
+    </script>
+</body>
+</html>

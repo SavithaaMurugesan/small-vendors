@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="image/images.jpg">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 190px;
+            /* background-color: rgb(146, 246, 246); */
+
+        }
+
+        .content {
+            height: 100px;
+            width: 100px;
+            border: 2px solid salmon;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: -190px;
+            
+            background-repeat: no-repeat;
+            z-index: 3;
+        }
+
+
+        .password-maincontent {
+            text-align: center;
+            border: 2px solid brown;
+            /*border-radius: 10px;*/
+            width: 350px;
+            height: 350px;
+            position: relative;
+            background-color: white;
+            z-index: 1;
+        }
+
+        .forgot {
+            width: 90%;
+            background-color: rgb(244, 111, 44);
+            color: black;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h6 {
+            text-align: left;
+        }
+
+        #username {
+            width: 90%;
+        }
+
+        .popup img {
+            width: 140px;
+            margin-top: -540px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+<div style="height: 500px; width: 100%;background-color: aqua;"></div>
+    <div class="password-maincontent">
+        <br>
+        <br><br><br>
+        <h1>Forgot Password</h1>
+        <div><label>
+                <h6>UserName <sup style="color: red;">*</sup></h6>
+            </label><br>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <br>
+        <button type="button" class="forgot" style="border-radius: 20px;" id="forgot" onclick="forgot()">Reset
+            Password</button>
+        <div class="popup">
+            <img src="image/key.png">
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
+</html>

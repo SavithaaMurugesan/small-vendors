@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="image/images.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <script src="./controler.js"></script>
+    <style>
+        body {
+           background-image: url(image/hhh.jpg);
+            background-color: white;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+           /* position: relative;*/
+            justify-content: center;
+            align-items: center;
+            margin-top: 160px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+            color: greenyellow;
+        }
+
+        /*.login-content {
+            text-align: center;
+            border: 2px solid salmon;
+            background-color: aliceblue;
+            border-top: 20px;
+            border-bottom: 20px;
+            border-left: 20px;
+            border-right: 20px;
+        }*/
+        .login-button {
+            width: 90%;
+            background-color: rgb(244, 111, 44);
+            color: black;
+
+        }
+
+        /*.login-button:hover {
+            opacity: 1;
+        }*/
+
+        /*.login-button,
+        a:hover {
+            background-color: aquamarine;
+            color: red;
+        }*/
+
+        .most-main-content {
+            display: grid;
+
+           /* grid-template-columns: 1fr 1fr;*/
+        }
+
+        /*.photo-container {
+            border: 2px solid salmon;
+            /* border-radius: 30px;*/
+        /* padding: 10px;
+            margin: 20px;
+            width: 445px;
+            background-color: white;
+            border-radius: 20px;
+        }*/
+
+        .photo-container img {
+            width: 450px;
+            height: 450px;
+            background-color: aqua;
+            /*border-radius: 20px;
+            border: 2px solid salmon;
+           margin-top:0px ;
+            align-items: left;
+            margin-right: 100px;*/
+        }
+
+        /*.main-container {
+            text-align: center;
+            /*border: 2px solid salmon;*/
+        /*border-radius: 30px;*/
+        /* padding: 10px;
+            margin: 20px;
+            width: 445px;
+            background-color: white;
+            margin-right: 200px;*/
+        /* width: 445px;
+            height: 445px;
+            align-items: center;
+            margin: 20px;
+            padding: 10px;
+            align-content: center;
+        }*/
+
+        .main-content {
+            width: 465px;
+            height: 465px;
+            /*margin: 20px;*/
+            padding: 10px;
+            text-align: center;
+            align-content: center;
+            background-color: rgba(55, 217, 249, 0.733);
+            border-radius: 20px;
+            border: 2px solid salmon;
+           /*margin-right: 400px;*/
+
+        }
+
+        /*.im-content {
+            width: 468px;
+            height: 475px;
+            align-items: center;
+            /*margin: 20px;*/
+           /* padding: 10px;
+            border: 4px solid salmon;
+            border-radius: 20px; 
+            align-content: center;
+            margin-left: 250px;
+            margin-top: 5px;
+            
+            background-color: rgba(55, 217, 249, 0.733);
+
+
+
+        }*/
+
+        /*.column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }*/
+
+        .pass:hover {
+            color: magenta;
+            background-color: white;
+        }
+        span,a{
+            color:black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="most-main-content">
+        <!--<div class="photo-container">
+            <div class="im-content">
+                <img src="image/woman- laptop1.jpg" width="431px" height="431px">
+            </div>-->
+        </div>
+    </div>
+    <!--</div>  
+                <div class="col-sm-10">-->
+    <div class="main-container">
+        <div class="main-content">
+            <h1><u>Login</u></h1><br>
+
+            <label for="uname">UserName</label>
+            <td><input type=" text" placeholder="Enter your Name" name="UserName"  id="username" required></td>
+            <div class="invalid-feedback">
+                Please enter your UserName !
+            </div>
+
+            <br><br>
+
+            <label for="psw">Password</label>
+            <input type="password" placeholder="Enter your Password" name="password" id="password"  required>
+            <div class="invalid-feedback">
+                Please enter your password !
+            </div>
+
+            <br><br>
+            <button type="button" class="login-button" style="border-radius: 20px;" id="loginUser" onclick="loginUser()">Login</button>
+            <br><br>
+
+           <!-- <label><input type="checkbox" name="Remember">Remember me</label>-->
+           
+
+            <span><a href="#" class="pass">Forget Password?</a></span></td>
+            <!--<a href="#" class="sign">Sign up </a></td>-->
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+<script >
+function loginUser(){
+    let userName=document.getElementById("username").value;
+    let pswd=document.getElementById("password").value;
+    let login=new Login();
+    login.checkLogin(userName,pswd);
+}
+</script>
+
+    <!--Vertically centered scrollable modal -->
+    <!--<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="login-center">
+            <form method="get">-->
+    <!--<div class="container">
+                    <div class="row">
+                      <div class="col">
+                        1 of 2
+                      </div>
+                      <div class="col">
+                        2 of 2
+                      </div>
+                    </div>-->
+    <!--<div class="container justify-content-center"">
+        <div class="row">
+            <div class="col-sm-10">-->
+    
+
+</body>
+
+</html>
